@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.io.IOException;
+
 /**
  * Created by fox on 1/10/15.
  */
@@ -18,13 +19,9 @@ public class Network {
     private Socket _sock = null;
     private BufferedWriter _writer = null;
     private BufferedReader _reader = null;
-    private String server = "irc.velox.pw";
-    private int port = 6667;
 
-    public void connect() throws IOException {
-        String server;
-        String port;
-        Socket _socket = new Socket(this.server, this.port);
+    public void connect(String server, int port) throws IOException {
+        Socket _socket = new Socket(server, port);
         this._writer = new BufferedWriter(new OutputStreamWriter(_socket.getOutputStream()));
         this._reader = new BufferedReader(new InputStreamReader(_socket.getInputStream()));
 
@@ -34,7 +31,9 @@ public class Network {
     public void writer(String msg) throws IOException {
         // TODO: Iterate over list
         // The exceptions are real!
-            this._writer.write(msg);
+        this._writer.write(msg);
+        this._writer.newLine(); //HERE!!!!!!
+        this._writer.flush();
 
     }
 
