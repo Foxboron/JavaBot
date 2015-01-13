@@ -2,6 +2,7 @@ package Bot;
 
 import Bot.Network;
 import Bot.Parser;
+import Bot.Commands;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,10 +18,12 @@ public class IrcBot {
 
         Conn.connect("irc.velox.pw", 6666);
 
+        String prefix = ".";
+
         String serverInput;
         List parsedMsg;
         String s;
-        while ((serverInput = Conn.reader().readLine()) != null) {
+        while ((serverInput = Conn.readLine()) != null) {
             parsedMsg = ircParser.Parse(serverInput);
             System.out.println(parsedMsg);
             s = (String)(parsedMsg.get(4));
@@ -33,7 +36,13 @@ public class IrcBot {
             }else if(parsedMsg.contains("266")){
                 Conn.writer("JOIN :#lobby");
             }else if(parsedMsg.contains("PRIVMSG")){
-                Conn.writer("PRIVMSG #lobby :Neger");
+                String cmd = (String)(parsedMsg.get(4));
+                if(cmd.substring(0,1).equals(prefix)){
+                    String[] cmdArgs = cmd.split(" ");
+                    String finalCmd = cmdArgs[0].substring(1);
+                    Commands CC = new Commands();
+                    Conn.writer("PRIVMSG #lobby :"+CC.getCmd(finalCmd, cmd));
+                }
             }
 
         }

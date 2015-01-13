@@ -31,13 +31,14 @@ public class Network {
     public void writer(String msg) throws IOException {
         // TODO: Iterate over list
         // The exceptions are real!
-        this._writer.write(msg);
-        this._writer.newLine(); //HERE!!!!!!
-        this._writer.flush();
-
+        if(!msg.isEmpty()) {
+            this._writer.write(msg);
+            this._writer.newLine(); //HERE!!!!!!
+            this._writer.flush();
+        }
     }
 
-    public BufferedReader reader() {
-        return this._reader;
+    public String readLine() throws IOException {
+        return this._reader.readLine();
     }
 }
