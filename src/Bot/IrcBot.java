@@ -28,7 +28,7 @@ public class IrcBot {
             System.out.println(parsedMsg);
             s = (String)(parsedMsg.get(4));
             System.out.println(s);
-            if (s.contains("Found your hostname") && parsedMsg.contains("Auth")) {
+            if (s.contains("Looking up your hostname") && parsedMsg.contains("Auth")) {
                 Conn.writer("NICK JavBot2");
                 Conn.writer("USER JavaBot 0 * :TheRealOJ");
             }else if(parsedMsg.contains("PING")){
