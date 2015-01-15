@@ -38,10 +38,11 @@ public class IrcBot {
             }else if(parsedMsg.contains("PRIVMSG")){
                 String cmd = (String)(parsedMsg.get(4));
                 if(cmd.substring(0,1).equals(prefix)){
-                    String[] cmdArgs = cmd.split(" ");
+                    String[] cmdArgs = cmd.split(" ", 2);
                     String finalCmd = cmdArgs[0].substring(1);
+                    String finalArgs = cmdArgs[1];
                     Commands CC = new Commands();
-                    Conn.writer("PRIVMSG #lobby :"+CC.getCmd(finalCmd, cmd));
+                    Conn.writer("PRIVMSG #lobby :"+CC.getCmd(finalCmd, finalArgs));
                 }
             }
 
