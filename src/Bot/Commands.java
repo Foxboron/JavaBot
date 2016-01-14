@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public class Commands {
 
+    private HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+    
     public String getCmd(String cmd, String args) {
         Class[] parameterTypes = new Class[1];
         parameterTypes[0] = String.class;
@@ -47,5 +49,13 @@ public class Commands {
             return "Not an integer";}
         return args;
     }
+    
+    public String addpoint(String args){
+        if (hmap.containsKey(name)) {
+            System.out.println("*A fuck was given*");
+            hmap.put(name, hmap.get(name) + 1);
+        }else{
+            hmap.put(name, +0);
+        }
 
 }
