@@ -51,11 +51,11 @@ public class Commands {
     }
     
     public String addpoint(String args){
-        if (hmap.containsKey(name)) {
+        if (hmap.containsKey(String)) {
             System.out.println("*A fuck was given*");
-            hmap.put(name, hmap.get(name) + 1);
+            hmap.put(String, hmap.get(String) + 1);
         }else{
-            hmap.put(name, +0);
+            hmap.put(String, +0);
         }
 
 }
